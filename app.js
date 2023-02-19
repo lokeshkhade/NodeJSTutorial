@@ -36,8 +36,7 @@ app.get('/api/courses/:year/:month', (req, res) => {
     res.send(req.query);
 });
 
-<<<<<<< Updated upstream
-=======
+
 // Input valdation we joi; npm i joi
 app.post('/api/courses', (req, res) => {
     const schema = Joi.object({
@@ -58,7 +57,7 @@ app.post('/api/courses', (req, res) => {
 });
 
 
->>>>>>> Stashed changes
+
 
 
 
