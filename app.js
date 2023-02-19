@@ -7,10 +7,7 @@ app.get('/', (req, res) => {
     res.send("Hello World");
 });
 
-<<<<<<< Updated upstream
-app.listen(3000, () => {
-    console.log("listening on port 3000");
-=======
+
 //To define a parameter we use :id(id is name of parameter)  
 // In order to read params we req.params.id
 app.get('/api/courses/:id', (req, res) => {
@@ -31,5 +28,5 @@ app.get('/api/courses/:year/:month', (req, res) => {
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`listening on port ${port}`);
->>>>>>> Stashed changes
+
 });
