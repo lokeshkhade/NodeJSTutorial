@@ -2,10 +2,12 @@ const express = require('express'); //Load express moudule which returns a funct
 const app = express(); //express fucntion retuns object of type express,by convention we call the object as app.app object support varios method get,post,put
 
 
+//To enable parsing of JSON object in the body of request
+app.use(express.json());
 const courses = [
-    { id: 1, course: 'Maths' },
-    { id: 2, course: 'English' },
-    { id: 3, course: 'Hindi' }
+    { id: 1, name: 'Maths' },
+    { id: 2, name: 'English' },
+    { id: 3, name: 'Hindi' }
 ];
 
 // First argument in get fuction is url or path.second parameter is a callback function which is called when we have http request to this endpoint '/'.This req object has bunch of properties ex.re
@@ -33,6 +35,17 @@ app.get('/api/courses/:year/:month', (req, res) => {
 app.get('/api/courses/:year/:month', (req, res) => {
     res.send(req.query);
 });
+
+
+app.post('/api/courses', (req, res) => {
+    const course = {
+        id: courses.length + 1,
+        name: req.body.name
+    };
+    courses.push(course);
+    res.send(course);
+});
+
 
 
 
