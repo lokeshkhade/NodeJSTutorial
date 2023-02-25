@@ -39,8 +39,12 @@ app.get('/api/courses/:year/:month', (req, res) => {
 });
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
 // Input valdation we joi; npm i joi
+=======
+
+>>>>>>> Stashed changes
 app.post('/api/courses', (req, res) => {
 
     const { error } = validateCourse(req.body);
