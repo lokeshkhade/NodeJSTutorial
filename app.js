@@ -3,8 +3,6 @@ const Joi = require('joi');//joi module return a Class and By covention class na
 const express = require('express'); //Load express moudule which returns a function express
 const app = express(); //express fucntion retuns object of type express,by convention we call the object as app.app object support varios method get,post,put
 
-//To enable parsing of JSON object in the body of request
-app.use(express.json());
 
 //To enable parsing of JSON object in the body of request
 app.use(express.json());
@@ -41,15 +39,11 @@ app.get('/api/courses/:year/:month', (req, res) => {
 });
 
 
-// Input valdation we joi; npm i joi
 app.post('/api/courses', (req, res) => {
-    const schema = Joi.object({
-        name: Joi.string().min(3).required()
-    });
-    const result = schema.validate(req.body);
 
-    if (result.error) {
-        res.status(404).send(result.error.details[0].message);
+    const { error } = validateCourse(req.body);
+    if (error) {
+        res.status(404).send(error.details[0].message);
     }
 
     const course = {
@@ -73,7 +67,32 @@ app.post('/api/courses', (req, res) => {
 });
 
 
+app.put('/api/courses/:id', (req, res) => {
+    //Find Course 
+    const course = courses.find(c => c.id === parseInt(req.params.id));
+    if (!course)
+        res.status(404).send('Course Not Found');
 
+
+    //Validate Course
+
+    const { error } = validateCourse(req.body);// Object Destructor 
+
+    if (error) {
+        res.status(404).send(error.details[0].message);
+    }
+    //Update Course
+    course.name = req.body.name;
+    res.send(course);
+});
+
+function validateCourse(course) {
+    const schema = Joi.object({
+        name: Joi.string().min(3).required()
+    });
+    return schema.validate(course);
+
+}
 
 
 const port = process.env.PORT || 3000;
