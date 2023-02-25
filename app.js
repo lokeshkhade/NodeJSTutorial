@@ -42,13 +42,10 @@ app.get('/api/courses/:year/:month', (req, res) => {
 =======
 // Input valdation we joi; npm i joi
 app.post('/api/courses', (req, res) => {
-    const schema = Joi.object({
-        name: Joi.string().min(3).required()
-    });
-    const result = schema.validate(req.body);
 
-    if (result.error) {
-        res.status(404).send(result.error.details[0].message);
+    const { error } = validateCourse(req.body);
+    if (error) {
+        res.status(404).send(error.details[0].message);
     }
 
     const course = {
@@ -60,6 +57,7 @@ app.post('/api/courses', (req, res) => {
 });
 
 
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
 
 app.post('/api/courses', (req, res) => {
@@ -71,8 +69,33 @@ app.post('/api/courses', (req, res) => {
     res.send(course);
 });
 
+=======
+app.put('/api/courses/:id', (req, res) => {
+    //Find Course 
+    const course = courses.find(c => c.id === parseInt(req.params.id));
+    if (!course)
+        res.status(404).send('Course Not Found');
+>>>>>>> Stashed changes
 
+    //Validate Course
 
+    const { error } = validateCourse(req.body);// Object Destructor 
+
+    if (error) {
+        res.status(404).send(error.details[0].message);
+    }
+    //Update Course
+    course.name = req.body.name;
+    res.send(course);
+});
+
+function validateCourse(course) {
+    const schema = Joi.object({
+        name: Joi.string().min(3).required()
+    });
+    return schema.validate(course);
+
+}
 
 
 const port = process.env.PORT || 3000;
