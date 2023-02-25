@@ -3,6 +3,8 @@ const Joi = require('joi');//joi module return a Class and By covention class na
 const express = require('express'); //Load express moudule which returns a function express
 const app = express(); //express fucntion retuns object of type express,by convention we call the object as app.app object support varios method get,post,put
 
+//To enable parsing of JSON object in the body of request
+app.use(express.json());
 
 //To enable parsing of JSON object in the body of request
 app.use(express.json());
@@ -38,8 +40,7 @@ app.get('/api/courses/:year/:month', (req, res) => {
     res.send(req.query);
 });
 
-<<<<<<< Updated upstream
-=======
+
 // Input valdation we joi; npm i joi
 app.post('/api/courses', (req, res) => {
     const schema = Joi.object({
@@ -60,7 +61,7 @@ app.post('/api/courses', (req, res) => {
 });
 
 
->>>>>>> Stashed changes
+
 
 app.post('/api/courses', (req, res) => {
     const course = {
