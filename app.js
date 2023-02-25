@@ -57,8 +57,7 @@ app.post('/api/courses', (req, res) => {
 });
 
 
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
+
 
 app.post('/api/courses', (req, res) => {
     const course = {
@@ -69,13 +68,13 @@ app.post('/api/courses', (req, res) => {
     res.send(course);
 });
 
-=======
+
 app.put('/api/courses/:id', (req, res) => {
     //Find Course 
     const course = courses.find(c => c.id === parseInt(req.params.id));
     if (!course)
         res.status(404).send('Course Not Found');
->>>>>>> Stashed changes
+
 
     //Validate Course
 
