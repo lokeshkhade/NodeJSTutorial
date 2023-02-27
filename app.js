@@ -43,6 +43,7 @@ app.get('/api/courses/:year/:month', (req, res) => {
 =======
 // Input valdation we joi; npm i joi
 >>>>>>> Stashed changes
+
 app.post('/api/courses', (req, res) => {
 
     const { error } = validateCourse(req.body);
